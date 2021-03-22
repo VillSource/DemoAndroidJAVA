@@ -3,6 +3,8 @@ package com.example.demooop_ktx
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.core.view.forEachIndexed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demooop_ktx.firedb.Db
 import com.example.demooop_ktx.firedb.ListData
@@ -19,7 +21,10 @@ class ListActivity : AppCompatActivity() {
             var title : String = etTodoTitle.text.toString()
             var detail : String = ""
             var group: Int =0
-            Db.uploadList(ListData(isChecked, title, detail, group))
+            if (title.isEmpty())
+                Toast.makeText(this,"no title",Toast.LENGTH_SHORT).show()
+            else
+                Db.uploadList(ListData(isChecked, title, detail, group))
         }
 
         Db.getListToRV(rvListTodo,this)

@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_list.*
 import java.security.AccessControlContext
 
-public class Db {
+class Db {
     companion object {
         val db = Firebase.firestore
         fun uploadList(data:ListData) {
@@ -39,7 +39,7 @@ public class Db {
                     if (snapshot != null && !snapshot.isEmpty) {
                         Log.d("Anirut", "Current data: ${snapshot.toString()}")
                         for (doc in snapshot.documentChanges){
-                            val data =ListData(group = 0,title = doc.document.get("title").toString())
+                            val data  =ListData(group = 0,title = doc.document.get("title").toString(),id = doc.document.id)
                             when(doc.type){
                                 DocumentChange.Type.ADDED -> todolist.add(data)
                             }
